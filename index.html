@@ -1,79 +1,579 @@
-<div class="app">
-  <aside class="sidebar">
-    <div class="brand">
-      <div class="brandMark">JV</div>
-      <div>
-        <div class="brandTitle">John’s Values</div>
-        <div class="brandSub">Tap Simulator • Value List</div>
-      </div>
-    </div>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>John’s Values • Tap Simulator</title>
 
-    <div class="meta">
-      <div class="metaLine">
-        Made by <b>John</b> &amp; <b>Raydes</b>
-      </div>
-      <a class="discordBtn" href="https://discord.gg/johntapsim" target="_blank" rel="noopener">
-        Join Discord for feedback
-      </a>
-      <div class="updated">
-        Last updated: <span id="lastUpdated"></span>
-      </div>
-    </div>
+  <style>
+    /* ======= YOUR CSS (ALL IN ONE PLACE) ======= */
+    :root{
+      --bg:#0b0b12;
+      --panel:#121222;
+      --panel2:#17172b;
+      --card:#141427;
+      --text:#ffffff;
+      --muted:#b8b8c8;
+      --line:rgba(255,255,255,0.08);
+      --shadow: 0 18px 40px rgba(0,0,0,0.35);
+      --radius:18px;
+      --accent:#46d6ff;
+      --accent2:#7c4dff;
+    }
+    *{ box-sizing:border-box; }
+    html, body { height:100%; }
+    body{
+      margin:0;
+      font-family: Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 600px at 10% 10%, rgba(70,214,255,0.15), transparent 60%),
+        radial-gradient(700px 500px at 90% 0%, rgba(124,77,255,0.14), transparent 55%),
+        radial-gradient(900px 700px at 60% 120%, rgba(255,210,77,0.10), transparent 55%),
+        var(--bg);
+    }
+    .app{
+      display:grid;
+      grid-template-columns: 330px 1fr;
+      gap: 18px;
+      padding: 18px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+    .sidebar{
+      background: linear-gradient(180deg, rgba(18,18,34,0.9), rgba(12,12,18,0.9));
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 16px;
+      position: sticky;
+      top: 18px;
+      height: calc(100vh - 36px);
+      overflow:auto;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding: 10px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.03);
+      border:1px solid rgba(255,255,255,0.06);
+    }
+    .brandMark{
+      width: 54px;
+      height: 44px;
+      border-radius: 14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      color: #0b0b12;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      font-size: 11px;
+      text-transform: uppercase;
+      padding: 0 8px;
+    }
+    .brandTitle{ font-size: 18px; font-weight: 900; }
+    .brandSub{ margin-top: 2px; color: var(--muted); font-size: 12px; }
+    .meta{
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.03);
+      border:1px solid rgba(255,255,255,0.06);
+    }
+    .metaLine{ color: var(--muted); font-size: 13px; }
+    .discordBtn{
+      margin-top: 10px;
+      display:block;
+      text-align:center;
+      padding: 10px 12px;
+      border-radius: 14px;
+      text-decoration:none;
+      font-weight: 900;
+      color: #0b0b12;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+    }
+    .updated{ margin-top: 10px; color: var(--muted); font-size: 12px; }
 
-    <div class="panel">
-      <div class="panelTitle">Browse</div>
-      <nav class="tabs" id="tabs"></nav>
-    </div>
+    .panel{
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.03);
+      border:1px solid rgba(255,255,255,0.06);
+    }
+    .panelTitle{ font-weight: 900; margin-bottom: 10px; letter-spacing: 0.2px; }
+    .input{
+      width:100%;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,0.10);
+      background: rgba(10,10,18,0.65);
+      color: white;
+      outline:none;
+    }
+    .hint{ margin-top: 8px; color: var(--muted); font-size: 12px; }
+    .tabs{ display:flex; flex-direction:column; gap:8px; }
+    .tab-btn{
+      text-align:left;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,0.08);
+      background: rgba(10,10,18,0.55);
+      color: white;
+      cursor:pointer;
+      font-weight: 800;
+      transition: transform .12s ease, border-color .12s ease, background .12s ease;
+    }
+    .tab-btn:hover{ transform: translateY(-1px); border-color: rgba(255,255,255,0.18); }
+    .tab-btn.active{
+      background: linear-gradient(135deg, rgba(70,214,255,0.20), rgba(124,77,255,0.16));
+      border-color: rgba(70,214,255,0.35);
+    }
+    .check{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+      user-select:none;
+    }
+    .check input{ transform: scale(1.1); }
 
-    <div class="panel">
-      <div class="panelTitle">Search</div>
-      <input id="searchInput" class="input" placeholder="Search pets..." />
-      <div class="hint">Tip: try “Top”, “Frost”, “Candy”</div>
-    </div>
+    .resetBtn{
+      margin-top: 12px;
+      width:100%;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.05);
+      color: white;
+      font-weight: 900;
+      cursor:pointer;
+    }
+    .resetBtn:hover{ background: rgba(255,255,255,0.08); }
 
-    <div class="panel">
-      <div class="panelTitle">Sort & Filters</div>
+    .main{
+      border-radius: var(--radius);
+      overflow:hidden;
+      border:1px solid var(--line);
+      box-shadow: var(--shadow);
+      background: linear-gradient(180deg, rgba(18,18,34,0.55), rgba(12,12,18,0.65));
+      display:flex;
+      flex-direction:column;
+      min-height: calc(100vh - 36px);
+    }
+    .topbar{
+      padding: 16px 16px 8px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      background: rgba(0,0,0,0.12);
+    }
+    .heroTitle{ font-size: 20px; font-weight: 1000; letter-spacing: 0.3px; }
+    .heroSub{ margin-top: 4px; color: var(--muted); font-size: 13px; }
+    .stats{ margin-top: 10px; display:flex; gap:10px; flex-wrap:wrap; }
+    .pill{
+      padding: 8px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.05);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .pill b{ color:white; }
+    #content{ padding: 16px; }
+    .pet-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+    }
+    .pet-card{
+      position: relative;
+      border-radius: 20px;
+      padding: 12px;
+      background: linear-gradient(180deg, rgba(20,20,39,0.9), rgba(12,12,18,0.9));
+      border: 1px solid rgba(255,255,255,0.08);
+      overflow:hidden;
+    }
+    .pet-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: radial-gradient(500px 120px at 20% 0%, rgba(70,214,255,0.16), transparent 55%);
+      pointer-events:none;
+    }
+    .petHead{ display:flex; gap: 12px; align-items:center; }
+    .petImgWrap{
+      width: 86px;
+      height: 86px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(0,0,0,0.20);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      flex: 0 0 auto;
+    }
+    .petImgWrap img{ width: 100%; height: 100%; object-fit: contain; }
+    .petTitle{ text-align:left; flex: 1; }
+    .petTitle h3{ margin:0; font-size: 16px; }
+    .tagRow{ margin-top: 6px; display:flex; gap: 8px; flex-wrap:wrap; }
+    .tag{
+      font-size: 11px;
+      padding: 5px 8px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.05);
+      color: var(--muted);
+      font-weight: 900;
+    }
+    .table{ margin-top: 10px; display:grid; gap:8px; }
+    .row{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding: 8px 10px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.04);
+      font-weight: 800;
+    }
+    .row span:first-child{ color: var(--muted); font-weight: 900; }
+    .row .n{ color: white; }
+    .row .g{ color: #ffd84d; }
+    .row .r{ color: #a970ff; }
+    .actions{ margin-top: 10px; display:flex; gap:10px; }
+    .btn{
+      flex:1;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.05);
+      color: white;
+      font-weight: 900;
+      cursor:pointer;
+      text-decoration:none;
+      text-align:center;
+    }
+    .btn:hover{ background: rgba(255,255,255,0.08); }
+    .btn.primary{
+      border-color: rgba(70,214,255,0.35);
+      background: linear-gradient(135deg, rgba(70,214,255,0.16), rgba(124,77,255,0.12));
+    }
+    .toast{
+      position: fixed;
+      bottom: 18px;
+      right: 18px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(10,10,18,0.92);
+      border:1px solid rgba(255,255,255,0.12);
+      color:white;
+      font-weight: 900;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity .18s ease, transform .18s ease;
+      pointer-events:none;
+      box-shadow: var(--shadow);
+    }
+    .toast.show{ opacity: 1; transform: translateY(0); }
 
-      <select id="sortSelect" class="input">
-        <option value="">Sort</option>
-        <option value="normal:low">Normal: Low → High</option>
-        <option value="normal:high">Normal: High → Low</option>
-        <option value="gold:low">Golden: Low → High</option>
-        <option value="gold:high">Golden: High → Low</option>
-        <option value="rainbow:low">Rainbow: Low → High</option>
-        <option value="rainbow:high">Rainbow: High → Low</option>
-        <option value="name:az">Name: A → Z</option>
-        <option value="name:za">Name: Z → A</option>
-      </select>
+    @media (max-width: 980px){
+      .app{ grid-template-columns: 1fr; gap: 12px; padding: 12px; }
+      .sidebar{
+        position: sticky;
+        top: 0;
+        height: auto;
+        z-index: 50;
+      }
+      .tabs{
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 6px;
+      }
+      .tab-btn{ min-width: max-content; white-space: nowrap; }
+      .pet-grid{ grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
+      .main{ min-height: auto; }
+    }
+  </style>
+</head>
 
-      <label class="check">
-        <input type="checkbox" id="tradeableOnly">
-        <span>Tradeable only (hide o/c)</span>
-      </label>
-
-      <label class="check">
-        <input type="checkbox" id="hasImageOnly">
-        <span>Has image only</span>
-      </label>
-
-      <button class="resetBtn" id="resetBtn">Reset filters</button>
-    </div>
-  </aside>
-
-  <main class="main">
-    <header class="topbar">
-      <div class="hero">
-        <div class="heroTitle">Value List</div>
-        <div class="heroSub" id="heroSub">
-          Suggest values or report mistakes in the Discord.
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brandMark">VALUES</div>
+        <div>
+          <div class="brandTitle">John’s Values</div>
+          <div class="brandSub">Tap Simulator • Value List</div>
         </div>
       </div>
 
-      <div class="stats" id="stats"></div>
-    </header>
+      <div class="meta">
+        <div class="metaLine">Made by <b>John</b> &amp; <b>Raydes</b></div>
+        <a class="discordBtn" href="https://discord.gg/johntapsim" target="_blank" rel="noopener">Join Discord for feedback</a>
+        <div class="updated">Last updated: <span id="lastUpdated"></span></div>
+      </div>
 
-    <section id="content"></section>
-  </main>
+      <div class="panel">
+        <div class="panelTitle">Browse</div>
+        <nav class="tabs" id="tabs"></nav>
+      </div>
 
-  <div class="toast" id="toast">Copied!</div>
-</div>
+      <div class="panel">
+        <div class="panelTitle">Search</div>
+        <input id="searchInput" class="input" placeholder="Search pets..." />
+        <div class="hint">Tip: try “Top”, “Frost”, “Candy”</div>
+      </div>
+
+      <div class="panel">
+        <div class="panelTitle">Sort & Filters</div>
+        <select id="sortSelect" class="input">
+          <option value="">Sort</option>
+          <option value="normal:low">Normal: Low → High</option>
+          <option value="normal:high">Normal: High → Low</option>
+          <option value="gold:low">Golden: Low → High</option>
+          <option value="gold:high">Golden: High → Low</option>
+          <option value="rainbow:low">Rainbow: Low → High</option>
+          <option value="rainbow:high">Rainbow: High → Low</option>
+          <option value="name:az">Name: A → Z</option>
+          <option value="name:za">Name: Z → A</option>
+        </select>
+
+        <label class="check"><input type="checkbox" id="tradeableOnly"><span>Tradeable only (hide o/c)</span></label>
+        <label class="check"><input type="checkbox" id="hasImageOnly"><span>Has image only</span></label>
+        <button class="resetBtn" id="resetBtn">Reset filters</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="hero">
+          <div class="heroTitle">Value List</div>
+          <div class="heroSub">Suggest values or report mistakes in the Discord.</div>
+        </div>
+        <div class="stats" id="stats"></div>
+      </header>
+
+      <section id="content"></section>
+    </main>
+
+    <div class="toast" id="toast">Copied!</div>
+  </div>
+
+  <script>
+    const PLACEHOLDER = "https://dummyimage.com/300x300/1a1a26/777777&text=Pet+Image";
+
+    function getImgSrc(img) {
+      if (!img) return PLACEHOLDER;
+      if (img === "https://image-link") return PLACEHOLDER;
+      return img;
+    }
+
+    function parseValue(v) {
+      if (v === null || v === undefined) return null;
+      if (typeof v === "number") return v;
+      if (typeof v !== "string") return null;
+      const s = v.trim().toLowerCase();
+      if (s === "o/c" || s === "oc") return null;
+      const kMatch = s.match(/^(\d+(\.\d+)?)k$/);
+      if (kMatch) return Math.round(parseFloat(kMatch[1]) * 1000);
+      const n = Number(s.replace(/,/g, ""));
+      return Number.isFinite(n) ? n : null;
+    }
+
+    function formatValue(v) {
+      if (v === null || v === undefined) return "—";
+      if (typeof v === "string") return v;
+      if (typeof v !== "number") return String(v);
+      if (v >= 1000) {
+        const k = v / 1000;
+        const nice = (Math.round(k * 10) / 10).toString();
+        return nice.endsWith(".0") ? `${Math.round(k)}k` : `${nice}k`;
+      }
+      return v.toString();
+    }
+
+    /* ✅ PASTE YOUR const data = {...} HERE */
+    const data = /* PASTE YOUR DATA OBJECT HERE */ {};
+
+    const TAB_CONFIG = [
+      { key: "leaderboard", label: "Leaderboard Pets", accent: ["#46d6ff","#7c4dff"] },
+      { key: "permanent", label: "Permanent Secrets", accent: ["#ff4d8d","#7c4dff"] },
+      { key: "limited", label: "Limited Secrets", accent: ["#54ff9b","#46d6ff"] },
+      { key: "mythics", label: "Mythics", accent: ["#ffd24d","#ff4d8d"] },
+      { key: "exclusives", label: "Exclusives", accent: ["#7c4dff","#46d6ff"] }
+    ];
+
+    let currentTab = "leaderboard";
+    const el = (id) => document.getElementById(id);
+
+    function setAccentForTab(tabKey){
+      const t = TAB_CONFIG.find(x => x.key === tabKey) || TAB_CONFIG[0];
+      document.documentElement.style.setProperty("--accent", t.accent[0]);
+      document.documentElement.style.setProperty("--accent2", t.accent[1]);
+    }
+
+    function buildTabs() {
+      const tabs = el("tabs");
+      tabs.innerHTML = "";
+      TAB_CONFIG.forEach(t => {
+        const btn = document.createElement("button");
+        btn.className = "tab-btn";
+        btn.textContent = t.label;
+        btn.onclick = () => showTab(t.key);
+        tabs.appendChild(btn);
+      });
+      updateActiveTabUI();
+    }
+
+    function updateActiveTabUI() {
+      const buttons = document.querySelectorAll(".tab-btn");
+      buttons.forEach((b, i) => {
+        const key = TAB_CONFIG[i].key;
+        b.classList.toggle("active", key === currentTab);
+      });
+    }
+
+    function toast(msg){
+      const t = el("toast");
+      t.textContent = msg;
+      t.classList.add("show");
+      setTimeout(() => t.classList.remove("show"), 1300);
+    }
+
+    function copyPet(p){
+      const text = `${p.name}\nNormal: ${p.normal}\nGolden: ${p.gold}\nRainbow: ${p.rainbow}`;
+      navigator.clipboard.writeText(text).then(() => toast("Copied values ✅"));
+    }
+
+    function applySort(list, sortValue){
+      if (!sortValue) return list;
+      const [field, dir] = sortValue.split(":");
+
+      const byNum = (a, b, get) => {
+        const av = get(a);
+        const bv = get(b);
+        if (av === null && bv === null) return 0;
+        if (av === null) return 1;
+        if (bv === null) return -1;
+        return dir === "low" ? av - bv : bv - av;
+      };
+
+      const byName = (a, b) => {
+        const an = a.name.toLowerCase();
+        const bn = b.name.toLowerCase();
+        return dir === "az" ? an.localeCompare(bn) : bn.localeCompare(an);
+      };
+
+      const cloned = [...list];
+      if (field === "name") return cloned.sort(byName);
+      if (field === "normal") return cloned.sort((a,b) => byNum(a,b, x => parseValue(x.normal)));
+      if (field === "gold") return cloned.sort((a,b) => byNum(a,b, x => parseValue(x.gold)));
+      if (field === "rainbow") return cloned.sort((a,b) => byNum(a,b, x => parseValue(x.rainbow)));
+      return cloned;
+    }
+
+    function getFilteredList(){
+      const grid = data[currentTab];
+      if (!Array.isArray(grid)) return [];
+
+      const q = el("searchInput").value.toLowerCase().trim();
+      const tradeableOnly = el("tradeableOnly").checked;
+      const hasImageOnly = el("hasImageOnly").checked;
+
+      let list = grid.filter(p => !q || p.name.toLowerCase().includes(q));
+      if (tradeableOnly) list = list.filter(p => parseValue(p.normal) !== null);
+      if (hasImageOnly) list = list.filter(p => p.img && p.img !== "https://image-link");
+
+      return applySort(list, el("sortSelect").value);
+    }
+
+    function render() {
+      const list = getFilteredList();
+      const total = (data[currentTab] || []).length;
+      const shown = list.length;
+      const tradeableCount = list.filter(p => parseValue(p.normal) !== null).length;
+
+      el("stats").innerHTML = `
+        <div class="pill">Tab: <b>${TAB_CONFIG.find(t=>t.key===currentTab)?.label || currentTab}</b></div>
+        <div class="pill">Showing: <b>${shown}</b> / ${total}</div>
+        <div class="pill">Tradeable: <b>${tradeableCount}</b></div>
+      `;
+
+      if (!shown){
+        el("content").innerHTML = `<div style="color:#b8b8c8;padding:18px;">No pets match your filters.</div>`;
+        return;
+      }
+
+      el("content").innerHTML =
+        `<div class="pet-grid">` +
+        list.map(p => {
+          const n = parseValue(p.normal);
+          const badge = (n === null) ? "o/c" : `Normal ${formatValue(n)}`;
+          const imgSrc = getImgSrc(p.img);
+
+          return `
+            <div class="pet-card">
+              <div class="petHead">
+                <div class="petImgWrap">
+                  <img src="${imgSrc}" alt="${p.name}" onerror="this.onerror=null;this.src='${PLACEHOLDER}';">
+                </div>
+                <div class="petTitle">
+                  <h3>${p.name}</h3>
+                  <div class="tagRow">
+                    <span class="tag">${badge}</span>
+                    <span class="tag">${currentTab}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="table">
+                <div class="row"><span>Normal</span><span class="n">${formatValue(parseValue(p.normal) ?? p.normal)}</span></div>
+                <div class="row"><span>Golden</span><span class="g">${formatValue(parseValue(p.gold) ?? p.gold)}</span></div>
+                <div class="row"><span>Rainbow</span><span class="r">${formatValue(parseValue(p.rainbow) ?? p.rainbow)}</span></div>
+              </div>
+
+              <div class="actions">
+                <button class="btn primary" onclick='copyPet(${JSON.stringify(p)})'>Copy</button>
+                <a class="btn" href="https://discord.gg/johntapsim" target="_blank" rel="noopener">Suggest</a>
+              </div>
+            </div>
+          `;
+        }).join("") +
+        `</div>`;
+    }
+
+    function showTab(tab) {
+      currentTab = tab;
+      setAccentForTab(tab);
+      updateActiveTabUI();
+      render();
+    }
+
+    el("resetBtn").addEventListener("click", () => {
+      el("searchInput").value = "";
+      el("sortSelect").value = "";
+      el("tradeableOnly").checked = false;
+      el("hasImageOnly").checked = false;
+      render();
+    });
+
+    el("searchInput").addEventListener("input", render);
+    el("sortSelect").addEventListener("change", render);
+    el("tradeableOnly").addEventListener("change", render);
+    el("hasImageOnly").addEventListener("change", render);
+
+    el("lastUpdated").textContent = new Date().toLocaleDateString();
+
+    buildTabs();
+    showTab("leaderboard");
+  </script>
+</body>
+</html>
+
