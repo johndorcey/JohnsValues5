@@ -1,0 +1,79 @@
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brandMark">JV</div>
+      <div>
+        <div class="brandTitle">John’s Values</div>
+        <div class="brandSub">Tap Simulator • Value List</div>
+      </div>
+    </div>
+
+    <div class="meta">
+      <div class="metaLine">
+        Made by <b>John</b> &amp; <b>Raydes</b>
+      </div>
+      <a class="discordBtn" href="https://discord.gg/johntapsim" target="_blank" rel="noopener">
+        Join Discord for feedback
+      </a>
+      <div class="updated">
+        Last updated: <span id="lastUpdated"></span>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panelTitle">Browse</div>
+      <nav class="tabs" id="tabs"></nav>
+    </div>
+
+    <div class="panel">
+      <div class="panelTitle">Search</div>
+      <input id="searchInput" class="input" placeholder="Search pets..." />
+      <div class="hint">Tip: try “Top”, “Frost”, “Candy”</div>
+    </div>
+
+    <div class="panel">
+      <div class="panelTitle">Sort & Filters</div>
+
+      <select id="sortSelect" class="input">
+        <option value="">Sort</option>
+        <option value="normal:low">Normal: Low → High</option>
+        <option value="normal:high">Normal: High → Low</option>
+        <option value="gold:low">Golden: Low → High</option>
+        <option value="gold:high">Golden: High → Low</option>
+        <option value="rainbow:low">Rainbow: Low → High</option>
+        <option value="rainbow:high">Rainbow: High → Low</option>
+        <option value="name:az">Name: A → Z</option>
+        <option value="name:za">Name: Z → A</option>
+      </select>
+
+      <label class="check">
+        <input type="checkbox" id="tradeableOnly">
+        <span>Tradeable only (hide o/c)</span>
+      </label>
+
+      <label class="check">
+        <input type="checkbox" id="hasImageOnly">
+        <span>Has image only</span>
+      </label>
+
+      <button class="resetBtn" id="resetBtn">Reset filters</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div class="hero">
+        <div class="heroTitle">Value List</div>
+        <div class="heroSub" id="heroSub">
+          Suggest values or report mistakes in the Discord.
+        </div>
+      </div>
+
+      <div class="stats" id="stats"></div>
+    </header>
+
+    <section id="content"></section>
+  </main>
+
+  <div class="toast" id="toast">Copied!</div>
+</div>
