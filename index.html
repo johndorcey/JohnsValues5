@@ -309,11 +309,12 @@
     @media (max-width: 980px){
       .app{ grid-template-columns: 1fr; gap: 12px; padding: 12px; }
       .sidebar{
-        position: sticky;
-        top: 0;
-        height: auto;
-        z-index: 50;
-      }
+  position: static;
+  height: auto;
+  top: auto;
+  z-index: auto;
+}
+
       .tabs{
         flex-direction: row;
         overflow-x: auto;
