@@ -400,7 +400,50 @@
     }
 
     /* ✅ PASTE YOUR const data = {...} HERE */
-    const data = /* PASTE YOUR DATA OBJECT HERE */ {};
+    const data = /* PASTE YOUR DATA OBJECT HERE */ {
+  leaderboard: [
+    {name:"Top 10 Divine Celestina", normal:13000, gold:"o/c", rainbow:"o/c", img:"https://i.postimg.cc/zbFX9yRD/10.png"},
+    {name:"Top 100 Silver Emperor", normal:1200, gold:5500, rainbow:6000, img:"https://i.postimg.cc/XBN73nw9/100.png"},
+    {name:"Top 250 Trophy Guardian", normal:550, gold:2300, rainbow:2500, img:"https://i.postimg.cc/5Q9N1fww/250.png"}
+  ],
+  permanent: [
+    {name:"King Kraken", normal:500, gold:"1.75k", rainbow:"2k", img:"https://i.postimg.cc/c6TLh8SY/kraken.png"},
+    {name:"Orca Dominator", normal:90, gold:250, rainbow:300, img:"https://i.postimg.cc/pykLCnHC/orca.png"},
+    {name:"Chocolate Maurader", normal:50, gold:200, rainbow:200, img:"https://i.postimg.cc/1VR5Pypc/choco.png"},
+    {name:"Candy God", normal:50, gold:250, rainbow:300, img:"https://i.postimg.cc/ct14ZdQm/candy.png"},
+    {name:"Magmasaur", normal:50, gold:250, rainbow:300, img:"https://i.postimg.cc/Hj3kz7gX/magmasaur.png"},
+    {name:"Raging Claw", normal:50, gold:250, rainbow:300, img:"https://i.postimg.cc/NLQ0RkWL/claw.png"}
+  ],
+  limited: [
+    {name:"Frosty Snowman", normal:40, gold:80, rainbow:160, img:"https://i.postimg.cc/dLxtPPD1/snowman.png"},
+    {name:"5M North Star", normal:40, gold:80, rainbow:160, img:"https://i.postimg.cc/vZQ1nGs0/star.png"},
+    {name:"5M Frost Monarch", normal:1500, gold:6000, rainbow:6250, img:"https://i.postimg.cc/8swz4rSY/monarch.png"},
+    {name:"Frost Spirit", normal:40, gold:80, rainbow:160, img:"https://i.postimg.cc/56cCfdX9/frost-spitirrrr.png"},
+    {name:"Christmas Tree", normal:90, gold:400, rainbow:450, img:"https://i.postimg.cc/ct3tfT55/christmas-tree.png"},
+    {name:"Gilded Seraphim", normal:1500, gold:6000, rainbow:6250, img:"https://i.postimg.cc/8jhr5KvM/seraphim.png"}
+  ],
+  mythics: [
+    {name:"Sharkie", normal:2, gold:5, rainbow:10, img:"https://i.postimg.cc/mkCcYDhT/image.png"},
+    {name:"Nutcracker", normal:2, gold:5, rainbow:10, img:"https://i.postimg.cc/sXztHw4H/nut.png"}
+  ],
+  exclusives: [
+    {name:"Kairos", normal:80, gold:350, rainbow:400, img:"https://i.postimg.cc/XXnv9kTC/kairos.png"},
+    {name:"Paradox", normal:140, gold:650, rainbow:750, img:"https://i.postimg.cc/RqGZdnBy/paradox.png"},
+    {name:"Chronos", normal:10000, gold:"o/c", rainbow:"o/c", img:"https://i.postimg.cc/SjmKcfwQ/chronos.png"},
+    {name:"Krampus", normal:2000, gold:6000, rainbow:7000, img:"https://i.postimg.cc/1fpNtCFP/krampus.png"},
+    {name:"Evil Snowman", normal:100, gold:300, rainbow:350, img:"https://i.postimg.cc/y3R30nrM/90.png"},
+    {name:"Snow Thief", normal:50, gold:200, rainbow:250, img:"https://i.postimg.cc/QK7KcSnv/80.png"},
+    {name:"Celestial Candycane", normal:1000, gold:4000, rainbow:4200, img:"https://i.postimg.cc/bSnS1LBc/candy.png"},
+    {name:"Gift Mimic", normal:50, gold:200, rainbow:250, img:"https://i.postimg.cc/8FkvxRjC/75.png"},
+    {name:"Christmas Goat", normal:0, gold:"o/c", rainbow:"o/c", img:"https://image-link"}
+  ];
+
+const TAB_CONFIG = [
+  { key: "leaderboard", label: "Leaderboard Pets", accent: ["#46d6ff","#7c4dff"] },
+  { key: "permanent", label: "Permanent Secrets", accent: ["#ff4d8d","#7c4dff"] },
+  { key: "limited", label: "Limited Secrets", accent: ["#54ff9b","#46d6ff"] },
+  { key: "mythics", label: "Mythics", accent: ["#ffd24d","#ff4d8d"] },
+  { key: "exclusives", label: "Exclusives", accent: ["#7c4dff","#46d6ff"] }};
 
     const TAB_CONFIG = [
       { key: "leaderboard", label: "Leaderboard Pets", accent: ["#46d6ff","#7c4dff"] },
