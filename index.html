@@ -31,6 +31,27 @@
     }
     body.noScroll{ overflow:hidden; }
 
+    /* ===== CLEAN DARK SCROLLBAR (PC) ===== */
+    /* Chrome / Edge / Safari */
+    *::-webkit-scrollbar{ width: 10px; height: 10px; }
+    *::-webkit-scrollbar-track{
+      background: rgba(255,255,255,0.04);
+      border-radius: 999px;
+    }
+    *::-webkit-scrollbar-thumb{
+      background: rgba(255,255,255,0.16);
+      border-radius: 999px;
+      border: 2px solid rgba(0,0,0,0.35);
+    }
+    *::-webkit-scrollbar-thumb:hover{
+      background: rgba(255,255,255,0.24);
+    }
+    /* Firefox */
+    *{
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.18) rgba(255,255,255,0.04);
+    }
+
     .app{
       display:grid;
       grid-template-columns: 330px 1fr;
@@ -96,7 +117,7 @@
       margin-top: 10px;
       display:block;
       text-align:center;
-      padding: 12px 12px; /* slightly bigger for mobile taps */
+      padding: 12px 12px;
       border-radius: 14px;
       text-decoration:none;
       font-weight: 900;
@@ -116,13 +137,13 @@
 
     .input{
       width:100%;
-      padding: 12px 12px; /* bigger */
+      padding: 12px 12px;
       border-radius: 14px;
       border:1px solid rgba(255,255,255,0.10);
       background: rgba(10,10,18,0.65);
       color: white;
       outline:none;
-      font-size: 15px; /* nicer on mobile */
+      font-size: 15px;
     }
     .hint{ margin-top: 8px; color: var(--muted); font-size: 12px; }
 
@@ -130,7 +151,7 @@
 
     .tab-btn{
       text-align:left;
-      padding: 12px 12px; /* bigger */
+      padding: 12px 12px;
       border-radius: 14px;
       border:1px solid rgba(255,255,255,0.08);
       background: rgba(10,10,18,0.55);
@@ -254,7 +275,7 @@
     .tagRow{ margin-top: 6px; display:flex; gap: 8px; flex-wrap:wrap; }
     .tag{
       font-size: 11px;
-      padding: 6px 9px; /* slightly bigger */
+      padding: 6px 9px;
       border-radius: 999px;
       border:1px solid rgba(255,255,255,0.10);
       background: rgba(255,255,255,0.05);
@@ -262,73 +283,83 @@
       font-weight: 900;
     }
 
+    /* ===== DEMAND TAGS ===== */
+    .tag.demand{
+      color: #06110b;
+      font-weight: 1000;
+      border: 1px solid rgba(0,0,0,0.18);
+    }
+    .tag.demand.high{ background: rgba(46, 204, 113, 0.95); }
+    .tag.demand.mid { background: rgba(255, 209, 77, 0.95); }
+    .tag.demand.low { background: rgba(255, 92, 92, 0.95); }
+
     .table{ margin-top: 10px; display:grid; gap:8px; }
     .row{
       display:flex;
       justify-content:space-between;
       align-items:center;
-      padding: 10px 10px; /* bigger */
+      padding: 10px 10px;
       border-radius: 14px;
       border:1px solid rgba(255,255,255,0.06);
       background: rgba(255,255,255,0.04);
       font-weight: 800;
       font-size: 14px;
     }
-.row span:first-child{ color: var(--muted); font-weight: 900; }
-.row .n{ color: white; }
+    .row span:first-child{ color: var(--muted); font-weight: 900; }
+    .row .n{ color: white; }
 
-/* ALWAYS visible + nicer colours */
-.row .g{
-  color: #ffd36b;                 /* proper gold */
-  text-shadow: 0 0 12px rgba(255, 208, 96, 0.25);
-}
-.row .r{
-  color: #bff6ff;                 /* bright readable base */
-  text-shadow: 0 0 12px rgba(120, 220, 255, 0.22);
-}
+    /* ALWAYS visible + nicer colours */
+    .row .g{
+      color: #ffd36b;
+      text-shadow: 0 0 12px rgba(255, 208, 96, 0.25);
+    }
+    .row .r{
+      color: #bff6ff;
+      text-shadow: 0 0 12px rgba(120, 220, 255, 0.22);
+    }
 
-/* Make the value look premium with a soft pill behind it */
-.row span:last-child{
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 70px;                /* keeps alignment looking clean */
-  padding: 6px 10px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
-  background: rgba(255,255,255,0.04);
-}
+    /* Make the value look premium with a soft pill behind it */
+    .row span:last-child{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 70px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+    }
 
-/* Gold “metal” pill */
-.row span.g{
-  background: linear-gradient(
-    90deg,
-    rgba(155, 106, 16, 0.22),
-    rgba(255, 211, 107, 0.16),
-    rgba(255, 241, 176, 0.12)
-  );
-  border-color: rgba(255, 211, 107, 0.22);
-}
+    /* Gold “metal” pill */
+    .row span.g{
+      background: linear-gradient(
+        90deg,
+        rgba(155, 106, 16, 0.22),
+        rgba(255, 211, 107, 0.16),
+        rgba(255, 241, 176, 0.12)
+      );
+      border-color: rgba(255, 211, 107, 0.22);
+    }
 
-/* True rainbow pill */
-.row span.r{
-  background: linear-gradient(90deg,
-    rgba(255, 59, 59, 0.16),
-    rgba(255, 138, 0, 0.14),
-    rgba(255, 208, 0, 0.14),
-    rgba(33, 208, 122, 0.14),
-    rgba(42, 167, 255, 0.14),
-    rgba(122, 92, 255, 0.14),
-    rgba(255, 79, 216, 0.16)
-  );
-  border-color: rgba(180, 230, 255, 0.20);
-}
+    /* True rainbow pill */
+    .row span.r{
+      background: linear-gradient(90deg,
+        rgba(255, 59, 59, 0.16),
+        rgba(255, 138, 0, 0.14),
+        rgba(255, 208, 0, 0.14),
+        rgba(33, 208, 122, 0.14),
+        rgba(42, 167, 255, 0.14),
+        rgba(122, 92, 255, 0.14),
+        rgba(255, 79, 216, 0.16)
+      );
+      border-color: rgba(180, 230, 255, 0.20);
+    }
 
     .actions{ margin-top: 10px; display:flex; gap:10px; }
 
     .btn{
       flex:1;
-      padding: 12px 12px; /* bigger */
+      padding: 12px 12px;
       border-radius: 14px;
       border:1px solid rgba(255,255,255,0.10);
       background: rgba(255,255,255,0.05);
@@ -381,7 +412,7 @@
     }
 
     .mobileControls{
-      display:none; /* shown only on mobile */
+      display:none;
       flex-direction: column;
       align-items:flex-end;
       gap: 8px;
@@ -400,7 +431,7 @@
     }
 
     .closeBtn{
-      display:none; /* shown only on mobile (inside drawer) */
+      display:none;
       margin-top: 10px;
       width:100%;
       padding: 12px 12px;
@@ -415,7 +446,6 @@
     @media (max-width: 980px){
       .app{ grid-template-columns: 1fr; gap: 12px; padding: 12px; }
 
-      /* Sidebar becomes off-canvas drawer */
       .sidebar{
         position: fixed;
         top: 12px;
@@ -431,11 +461,8 @@
       .sidebar.open{ transform: translateX(0); }
 
       .closeBtn{ display:block; }
-
-      /* Main takes full width */
       .main{ min-height: auto; }
 
-      /* Tabs horizontal inside the drawer */
       .tabs{
         flex-direction: row;
         overflow-x: auto;
@@ -443,15 +470,11 @@
       }
       .tab-btn{ min-width: max-content; white-space: nowrap; }
 
-      /* Topbar shows filter button */
       .mobileControls{ display:flex; }
-
-      /* Cards: slightly smaller minimum to fit */
       .pet-grid{ grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
     }
 
     @media (max-width: 520px){
-      /* Force single column cards on small phones */
       .pet-grid{ grid-template-columns: 1fr; }
       #content{ padding: 12px; }
       .petImgWrap{ width: 76px; height: 76px; }
@@ -520,7 +543,6 @@
           <div class="stats" id="stats"></div>
         </div>
 
-        <!-- Mobile-only controls -->
         <div class="mobileControls">
           <button class="filterBtn" id="openSidebarBtn">Filters</button>
         </div>
@@ -589,7 +611,6 @@
         {name:"Raging Claw", normal:50, gold:250, rainbow:300, img:"https://i.postimg.cc/NLQ0RkWL/claw.png"},
         {name:"Luminary Star", normal:125, gold:450, rainbow:500, img:"https://i.postimg.cc/GByD2ZpT/luminary-star-watermarked.png"},
         {name:"Cosmic Chaos", normal:475, gold:2100, rainbow:2250, img:"https://i.postimg.cc/3k6p3KYs/cosmic-star-watermarked.png"}
-    
       ],
 
       limited: [
@@ -619,8 +640,21 @@
         {name:"Gift Mimic", normal:50, gold:200, rainbow:250, img:"https://i.postimg.cc/8FkvxRjC/75.png"},
         {name:"Hooded Krampus", normal:500, gold:2000, rainbow:2100, img:"https://i.postimg.cc/0bpJQWSS/hooded.png"},
         {name:"Disco Lord", normal:1200, gold:4500, rainbow:5000, img:"https://8upload.com/image/49098f59873d3dc0/disco.png"}
-        ]
+      ]
     };
+
+    // Randomly assign demand to every pet (you can edit later by setting demand:"high"/"mid"/"low")
+    function assignRandomDemand(){
+      const choices = ["high","mid","low"];
+      for (const key in data){
+        const arr = data[key];
+        if (!Array.isArray(arr)) continue;
+        arr.forEach(p => {
+          if (!p.demand) p.demand = choices[Math.floor(Math.random()*choices.length)];
+        });
+      }
+    }
+    assignRandomDemand();
 
     // ===== TABS =====
     const TAB_CONFIG = [
@@ -649,7 +683,6 @@
         btn.textContent = t.label;
         btn.onclick = () => {
           showTab(t.key);
-          // On mobile, close drawer after choosing a tab
           closeSidebar();
         };
         tabs.appendChild(btn);
@@ -673,7 +706,7 @@
     }
 
     function copyPet(p){
-      const text = `${p.name}\nNormal: ${p.normal}\nGolden: ${p.gold}\nRainbow: ${p.rainbow}`;
+      const text = `${p.name}\nNormal: ${p.normal}\nGolden: ${p.gold}\nRainbow: ${p.rainbow}\nDemand: ${p.demand || "mid"}`;
       navigator.clipboard.writeText(text).then(() => toast("Copied values ✅"));
     }
 
@@ -719,6 +752,13 @@
       return applySort(list, el("sortSelect").value);
     }
 
+    function demandInfo(p){
+      const raw = (p.demand || "mid").toString().toLowerCase();
+      const key = (raw === "high" || raw === "h") ? "high" : (raw === "low" || raw === "l") ? "low" : "mid";
+      const text = key === "high" ? "High" : key === "low" ? "Low" : "Mid";
+      return { key, text };
+    }
+
     function render() {
       const list = getFilteredList();
       const total = (data[currentTab] || []).length;
@@ -739,9 +779,8 @@
       el("content").innerHTML =
         `<div class="pet-grid">` +
         list.map(p => {
-          const n = parseValue(p.normal);
-          const badge = (n === null) ? "o/c" : `Normal ${formatValue(n)}`;
           const imgSrc = getImgSrc(p.img);
+          const d = demandInfo(p);
 
           return `
             <div class="pet-card">
@@ -752,7 +791,7 @@
                 <div class="petTitle">
                   <h3>${p.name}</h3>
                   <div class="tagRow">
-                    <span class="tag">${badge}</span>
+                    <span class="tag demand ${d.key}">Demand: ${d.text}</span>
                     <span class="tag">${currentTab}</span>
                   </div>
                 </div>
@@ -800,7 +839,6 @@
     el("closeSidebarBtn").addEventListener("click", closeSidebar);
     backdrop.addEventListener("click", closeSidebar);
 
-    // Close drawer on Escape (nice for desktop users too)
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") closeSidebar();
     });
