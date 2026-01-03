@@ -29,6 +29,7 @@
         radial-gradient(900px 700px at 60% 120%, rgba(255,210,77,0.10), transparent 55%),
         var(--bg);
     }
+    body.noScroll{ overflow:hidden; }
 
     .app{
       display:grid;
@@ -39,6 +40,7 @@
       margin: 0 auto;
     }
 
+    /* ===== SIDEBAR (DESKTOP DEFAULT) ===== */
     .sidebar{
       background: linear-gradient(180deg, rgba(18,18,34,0.9), rgba(12,12,18,0.9));
       border:1px solid var(--line);
@@ -49,6 +51,7 @@
       top: 18px;
       height: calc(100vh - 36px);
       overflow:auto;
+      z-index: 10;
     }
 
     .brand{
@@ -93,7 +96,7 @@
       margin-top: 10px;
       display:block;
       text-align:center;
-      padding: 10px 12px;
+      padding: 12px 12px; /* slightly bigger for mobile taps */
       border-radius: 14px;
       text-decoration:none;
       font-weight: 900;
@@ -113,12 +116,13 @@
 
     .input{
       width:100%;
-      padding: 10px 12px;
+      padding: 12px 12px; /* bigger */
       border-radius: 14px;
       border:1px solid rgba(255,255,255,0.10);
       background: rgba(10,10,18,0.65);
       color: white;
       outline:none;
+      font-size: 15px; /* nicer on mobile */
     }
     .hint{ margin-top: 8px; color: var(--muted); font-size: 12px; }
 
@@ -126,7 +130,7 @@
 
     .tab-btn{
       text-align:left;
-      padding: 10px 12px;
+      padding: 12px 12px; /* bigger */
       border-radius: 14px;
       border:1px solid rgba(255,255,255,0.08);
       background: rgba(10,10,18,0.55);
@@ -134,6 +138,7 @@
       cursor:pointer;
       font-weight: 800;
       transition: transform .12s ease, border-color .12s ease, background .12s ease;
+      font-size: 14px;
     }
     .tab-btn:hover{ transform: translateY(-1px); border-color: rgba(255,255,255,0.18); }
     .tab-btn.active{
@@ -150,18 +155,19 @@
       font-size: 13px;
       user-select:none;
     }
-    .check input{ transform: scale(1.1); }
+    .check input{ transform: scale(1.15); }
 
     .resetBtn{
       margin-top: 12px;
       width:100%;
-      padding: 10px 12px;
+      padding: 12px 12px;
       border-radius: 14px;
       border:1px solid rgba(255,255,255,0.10);
       background: rgba(255,255,255,0.05);
       color: white;
       font-weight: 900;
       cursor:pointer;
+      font-size: 14px;
     }
     .resetBtn:hover{ background: rgba(255,255,255,0.08); }
 
@@ -177,10 +183,15 @@
     }
 
     .topbar{
-      padding: 16px 16px 8px 16px;
+      padding: 16px 16px 12px 16px;
       border-bottom: 1px solid rgba(255,255,255,0.06);
       background: rgba(0,0,0,0.12);
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 12px;
     }
+
     .heroTitle{ font-size: 20px; font-weight: 1000; letter-spacing: 0.3px; }
     .heroSub{ margin-top: 4px; color: var(--muted); font-size: 13px; }
 
@@ -243,7 +254,7 @@
     .tagRow{ margin-top: 6px; display:flex; gap: 8px; flex-wrap:wrap; }
     .tag{
       font-size: 11px;
-      padding: 5px 8px;
+      padding: 6px 9px; /* slightly bigger */
       border-radius: 999px;
       border:1px solid rgba(255,255,255,0.10);
       background: rgba(255,255,255,0.05);
@@ -256,11 +267,12 @@
       display:flex;
       justify-content:space-between;
       align-items:center;
-      padding: 8px 10px;
+      padding: 10px 10px; /* bigger */
       border-radius: 14px;
       border:1px solid rgba(255,255,255,0.06);
       background: rgba(255,255,255,0.04);
       font-weight: 800;
+      font-size: 14px;
     }
     .row span:first-child{ color: var(--muted); font-weight: 900; }
     .row .n{ color: white; }
@@ -271,7 +283,7 @@
 
     .btn{
       flex:1;
-      padding: 10px 12px;
+      padding: 12px 12px; /* bigger */
       border-radius: 14px;
       border:1px solid rgba(255,255,255,0.10);
       background: rgba(255,255,255,0.05);
@@ -280,6 +292,7 @@
       cursor:pointer;
       text-decoration:none;
       text-align:center;
+      font-size: 14px;
     }
     .btn:hover{ background: rgba(255,255,255,0.08); }
 
@@ -303,33 +316,110 @@
       transition: opacity .18s ease, transform .18s ease;
       pointer-events:none;
       box-shadow: var(--shadow);
+      z-index: 100;
     }
     .toast.show{ opacity: 1; transform: translateY(0); }
 
+    /* ===== MOBILE DRAWER UI ===== */
+    .backdrop{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s ease;
+      z-index: 40;
+    }
+    .backdrop.show{
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .mobileControls{
+      display:none; /* shown only on mobile */
+      flex-direction: column;
+      align-items:flex-end;
+      gap: 8px;
+      min-width: 120px;
+    }
+
+    .filterBtn{
+      border:1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      color: white;
+      font-weight: 900;
+      padding: 10px 12px;
+      border-radius: 14px;
+      cursor:pointer;
+      width: 100%;
+    }
+
+    .closeBtn{
+      display:none; /* shown only on mobile (inside drawer) */
+      margin-top: 10px;
+      width:100%;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      color: white;
+      font-weight: 900;
+      cursor:pointer;
+    }
+
     @media (max-width: 980px){
       .app{ grid-template-columns: 1fr; gap: 12px; padding: 12px; }
-      .sidebar{
-  position: static;
-  height: auto;
-  top: auto;
-  z-index: auto;
-}
 
+      /* Sidebar becomes off-canvas drawer */
+      .sidebar{
+        position: fixed;
+        top: 12px;
+        bottom: 12px;
+        left: 12px;
+        width: min(360px, 88vw);
+        height: auto;
+        transform: translateX(-110%);
+        transition: transform .18s ease;
+        z-index: 50;
+        border-radius: 20px;
+      }
+      .sidebar.open{ transform: translateX(0); }
+
+      .closeBtn{ display:block; }
+
+      /* Main takes full width */
+      .main{ min-height: auto; }
+
+      /* Tabs horizontal inside the drawer */
       .tabs{
         flex-direction: row;
         overflow-x: auto;
         padding-bottom: 6px;
       }
       .tab-btn{ min-width: max-content; white-space: nowrap; }
+
+      /* Topbar shows filter button */
+      .mobileControls{ display:flex; }
+
+      /* Cards: slightly smaller minimum to fit */
       .pet-grid{ grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
-      .main{ min-height: auto; }
+    }
+
+    @media (max-width: 520px){
+      /* Force single column cards on small phones */
+      .pet-grid{ grid-template-columns: 1fr; }
+      #content{ padding: 12px; }
+      .petImgWrap{ width: 76px; height: 76px; }
+      .heroTitle{ font-size: 18px; }
     }
   </style>
 </head>
 
 <body>
+  <div class="backdrop" id="backdrop"></div>
+
   <div class="app">
-    <aside class="sidebar">
+    <aside class="sidebar" id="sidebar">
       <div class="brand">
         <div class="brandMark">VALUES</div>
         <div>
@@ -372,6 +462,8 @@
         <label class="check"><input type="checkbox" id="tradeableOnly"><span>Tradeable only (hide o/c)</span></label>
         <label class="check"><input type="checkbox" id="hasImageOnly"><span>Has image only</span></label>
         <button class="resetBtn" id="resetBtn">Reset filters</button>
+
+        <button class="closeBtn" id="closeSidebarBtn">Close</button>
       </div>
     </aside>
 
@@ -380,8 +472,13 @@
         <div class="hero">
           <div class="heroTitle">Value List</div>
           <div class="heroSub">Suggest values or report mistakes in the Discord.</div>
+          <div class="stats" id="stats"></div>
         </div>
-        <div class="stats" id="stats"></div>
+
+        <!-- Mobile-only controls -->
+        <div class="mobileControls">
+          <button class="filterBtn" id="openSidebarBtn">Filters</button>
+        </div>
       </header>
 
       <section id="content"></section>
@@ -496,7 +593,11 @@
         const btn = document.createElement("button");
         btn.className = "tab-btn";
         btn.textContent = t.label;
-        btn.onclick = () => showTab(t.key);
+        btn.onclick = () => {
+          showTab(t.key);
+          // On mobile, close drawer after choosing a tab
+          closeSidebar();
+        };
         tabs.appendChild(btn);
       });
       updateActiveTabUI();
@@ -625,6 +726,30 @@
       updateActiveTabUI();
       render();
     }
+
+    // ===== MOBILE SIDEBAR OPEN/CLOSE =====
+    const sidebar = el("sidebar");
+    const backdrop = el("backdrop");
+
+    function openSidebar(){
+      sidebar.classList.add("open");
+      backdrop.classList.add("show");
+      document.body.classList.add("noScroll");
+    }
+    function closeSidebar(){
+      sidebar.classList.remove("open");
+      backdrop.classList.remove("show");
+      document.body.classList.remove("noScroll");
+    }
+
+    el("openSidebarBtn").addEventListener("click", openSidebar);
+    el("closeSidebarBtn").addEventListener("click", closeSidebar);
+    backdrop.addEventListener("click", closeSidebar);
+
+    // Close drawer on Escape (nice for desktop users too)
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeSidebar();
+    });
 
     // Controls
     el("resetBtn").addEventListener("click", () => {
