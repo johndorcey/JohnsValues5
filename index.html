@@ -283,15 +283,32 @@
       font-weight: 900;
     }
 
-    /* ===== DEMAND TAGS ===== */
-    .tag.demand{
-      color: #06110b;
-      font-weight: 1000;
-      border: 1px solid rgba(0,0,0,0.18);
-    }
-    .tag.demand.high{ background: rgba(46, 204, 113, 0.95); }
-    .tag.demand.mid { background: rgba(255, 209, 77, 0.95); }
-    .tag.demand.low { background: rgba(255, 92, 92, 0.95); }
+    /* ===== DEMAND TAGS (sleek) ===== */
+.tag.demand{
+  position: relative;
+  font-weight: 1000;
+  letter-spacing: 0.2px;
+
+  /* subtle dark fill */
+  color: var(--muted);
+  background:
+    linear-gradient(rgba(12,12,18,0.55), rgba(12,12,18,0.55)) padding-box,
+    linear-gradient(135deg, rgba(255,255,255,0.22), rgba(255,255,255,0.06)) border-box;
+
+  border: 1px solid transparent;
+  box-shadow: 0 10px 18px rgba(0,0,0,0.22);
+}
+
+/* only colour the text (clean) */
+.tag.demand.high{ color: #54ff9b; }
+.tag.demand.mid { color: #ffd24d; }
+.tag.demand.low { color: #ff5c5c; }
+
+/* optional: tiny glow so it feels “premium” */
+.tag.demand.high{ text-shadow: 0 0 12px rgba(84,255,155,0.18); }
+.tag.demand.mid { text-shadow: 0 0 12px rgba(255,210,77,0.16); }
+.tag.demand.low { text-shadow: 0 0 12px rgba(255,92,92,0.16); }
+
 
     .table{ margin-top: 10px; display:grid; gap:8px; }
     .row{
