@@ -599,55 +599,57 @@
     // ===== DATA =====
     // To set manually later, add: demand:"high"  OR  demand:"mid"  OR  demand:"low"
     const data = {
-      leaderboard: [
-        {name:"Top 10 Divine Celestina", normal:13000, gold:"o/c", rainbow:"o/c", img:"https://i.postimg.cc/zbFX9yRD/10.png"},
-        {name:"Top 100 Silver Emperor", normal:1200, gold:5500, rainbow:6000, img:"https://i.postimg.cc/XBN73nw9/100.png"},
-        {name:"Top 250 Trophy Guardian", normal:550, gold:2300, rainbow:2500, img:"https://i.postimg.cc/5Q9N1fww/250.png"},
-        {name:"Top 10 Divine Celestina", normal:12000, gold:"o/c", rainbow:"o/c", img:"https://8upload.com/image/dcd03e3b3d3fe07e/top_10.png"},
-        {name:"Top 100 Silver Emperor", normal:1000, gold:4600, rainbow:5000, img:"https://8upload.com/image/3b5c0a07efffa9dd/top_100.png"},
-        {name:"Top 250 Trophy Guardian", normal:450, gold:1850, rainbow:1950, img:"https://8upload.com/image/d5d970cabf198b70/top_250.png"}
-      ],
+  leaderboard: [
+    {name:"Top 10 Divine Celestina", demand:"high", normal:13000, gold:"o/c", rainbow:"o/c", img:"https://i.postimg.cc/zbFX9yRD/10.png"},
+    {name:"Top 100 Silver Emperor", demand:"high", normal:1200, gold:5500, rainbow:6000, img:"https://i.postimg.cc/XBN73nw9/100.png"},
+    {name:"Top 250 Trophy Guardian", demand:"high", normal:550, gold:2300, rainbow:2500, img:"https://i.postimg.cc/5Q9N1fww/250.png"},
+    {name:"Top 10 Divine Celestina", demand:"high", normal:12000, gold:"o/c", rainbow:"o/c", img:"https://8upload.com/image/dcd03e3b3d3fe07e/top_10.png"},
+    {name:"Top 100 Silver Emperor", demand:"mid", normal:1000, gold:4600, rainbow:5000, img:"https://8upload.com/image/3b5c0a07efffa9dd/top_100.png"},
+    {name:"Top 250 Trophy Guardian", demand:"low", normal:450, gold:1850, rainbow:1950, img:"https://8upload.com/image/d5d970cabf198b70/top_250.png"}
+  ],
 
-      permanent: [
-        {name:"King Kraken", normal:150, gold:700, rainbow:750, img:"https://i.postimg.cc/c6TLh8SY/kraken.png"},
-        {name:"Orca Dominator", normal:35, gold:150, rainbow:200, img:"https://i.postimg.cc/pykLCnHC/orca.png"},
-        {name:"Chocolate Maurader", normal:75, gold:325, rainbow:350, img:"https://i.postimg.cc/1VR5Pypc/choco.png"},
-        {name:"Candy God", normal:35, gold:150, rainbow:175, img:"https://i.postimg.cc/ct14ZdQm/candy.png"},
-        {name:"Magmasaur", normal:50, gold:250, rainbow:300, img:"https://i.postimg.cc/Hj3kz7gX/magmasaur.png"},
-        {name:"Raging Claw", normal:50, gold:250, rainbow:300, img:"https://i.postimg.cc/NLQ0RkWL/claw.png"},
-        {name:"Luminary Star", normal:125, gold:450, rainbow:500, img:"https://i.postimg.cc/GByD2ZpT/luminary-star-watermarked.png"},
-        {name:"Cosmic Chaos", normal:475, gold:2100, rainbow:2250, img:"https://i.postimg.cc/3k6p3KYs/cosmic-star-watermarked.png"}
-      ],
+  permanent: [
+    {name:"King Kraken", demand:"high", normal:150, gold:700, rainbow:750, img:"https://i.postimg.cc/c6TLh8SY/kraken.png"},
+    {name:"Orca Dominator", demand:"mid", normal:35, gold:150, rainbow:200, img:"https://i.postimg.cc/pykLCnHC/orca.png"},
+    {name:"Chocolate Maurader", demand:"mid", normal:75, gold:325, rainbow:350, img:"https://i.postimg.cc/1VR5Pypc/choco.png"},
+    {name:"Candy God", demand:"high", normal:35, gold:150, rainbow:175, img:"https://i.postimg.cc/ct14ZdQm/candy.png"},
+    {name:"Magmasaur", demand:"mid", normal:50, gold:250, rainbow:300, img:"https://i.postimg.cc/Hj3kz7gX/magmasaur.png"},
+    {name:"Raging Claw", demand:"mid", normal:50, gold:250, rainbow:300, img:"https://i.postimg.cc/NLQ0RkWL/claw.png"},
+    {name:"Luminary Star", demand:"high", normal:125, gold:450, rainbow:500, img:"https://i.postimg.cc/GByD2ZpT/luminary-star-watermarked.png"},
+    {name:"Cosmic Chaos", demand:"high", normal:475, gold:2100, rainbow:2250, img:"https://i.postimg.cc/3k6p3KYs/cosmic-star-watermarked.png"}
+  ],
 
-      limited: [
-        {name:"Frosty Snowman", normal:100, gold:425, rainbow:450, img:"https://i.postimg.cc/dLxtPPD1/snowman.png"},
-        {name:"5M North Star", normal:200, gold:900, rainbow:1000, img:"https://i.postimg.cc/vZQ1nGs0/star.png"},
-        {name:"5M Frost Monarch", normal:1200, gold:4500, rainbow:4750, img:"https://i.postimg.cc/8swz4rSY/monarch.png"},
-        {name:"Frost Spirit", normal:40, gold:80, rainbow:160, img:"https://i.postimg.cc/56cCfdX9/frost-spitirrrr.png"},
-        {name:"Christmas Tree", normal:90, gold:375, rainbow:400, img:"https://i.postimg.cc/ct3tfT55/christmas-tree.png"},
-        {name:"Gilded Seraphim", normal:900, gold:3750, rainbow:4000, img:"https://i.postimg.cc/8jhr5KvM/seraphim.png"},
-        {name:"2026 Baloons", normal:130, gold:500, rainbow:540, img:"https://8upload.com/image/a60ddf8525331343/balloon.png"},
-        {name:"New Year Dragon", normal:450, gold:2000, rainbow:2200, img:"https://8upload.com/image/c25a161a1aa044a2/dragon.png"},
-        {name:"2026 Overlord", normal:1350, gold:5450, rainbow:5600, img:"https://8upload.com/image/fc452cccc3817230/overlord.png"}
-      ],
+  limited: [
+    {name:"Frosty Snowman", 
+      demand:"mid", normal:100, gold:425, rainbow:450, img:"https://i.postimg.cc/dLxtPPD1/snowman.png"},
+    {name:"5M North Star", demand:"mid", normal:200, gold:900, rainbow:1000, img:"https://i.postimg.cc/vZQ1nGs0/star.png"},
+    {name:"5M Frost Monarch", demand:"high", normal:1200, gold:4500, rainbow:4750, img:"https://i.postimg.cc/8swz4rSY/monarch.png"},
+    {name:"Frost Spirit", demand:"low", normal:40, gold:80, rainbow:160, img:"https://i.postimg.cc/56cCfdX9/frost-spitirrrr.png"},
+    {name:"Christmas Tree", demand:"mid", normal:90, gold:375, rainbow:400, img:"https://i.postimg.cc/ct3tfT55/christmas-tree.png"},
+    {name:"Gilded Seraphim", demand:"high", normal:900, gold:3750, rainbow:4000, img:"https://i.postimg.cc/8jhr5KvM/seraphim.png"},
+    {name:"2026 Baloons", demand:"mid", normal:130, gold:500, rainbow:540, img:"https://8upload.com/image/a60ddf8525331343/balloon.png"},
+    {name:"New Year Dragon", demand:"high", normal:450, gold:2000, rainbow:2200, img:"https://8upload.com/image/c25a161a1aa044a2/dragon.png"},
+    {name:"2026 Overlord", demand:"high", normal:1350, gold:5450, rainbow:5600, img:"https://8upload.com/image/fc452cccc3817230/overlord.png"}
+  ],
 
-      mythics: [
-        {name:"Starshine Warrior", normal:2, gold:5, rainbow:10, img:"https://8upload.com/image/409cbe0be76db7be/new_stat.png"}
-      ],
+  mythics: [
+    {name:"Starshine Warrior", demand:"mid", normal:2, gold:5, rainbow:10, img:"https://8upload.com/image/409cbe0be76db7be/new_stat.png"}
+  ],
 
-      exclusives: [
-        {name:"Kairos", normal:80, gold:250, rainbow:300, img:"https://i.postimg.cc/XXnv9kTC/kairos.png"},
-        {name:"Paradox", normal:125, gold:550, rainbow:600, img:"https://i.postimg.cc/RqGZdnBy/paradox.png"},
-        {name:"Chronos", normal:10000, gold:"o/c", rainbow:"o/c", img:"https://i.postimg.cc/SjmKcfwQ/chronos.png"},
-        {name:"Krampus", normal:2300, gold:9500, rainbow:10000, img:"https://i.postimg.cc/1fpNtCFP/krampus.png"},
-        {name:"Evil Snowman", normal:100, gold:300, rainbow:350, img:"https://i.postimg.cc/y3R30nrM/90.png"},
-        {name:"Snow Thief", normal:50, gold:200, rainbow:250, img:"https://i.postimg.cc/QK7KcSnv/80.png"},
-        {name:"Celestial Candycane", normal:1000, gold:4000, rainbow:4200, img:"https://i.postimg.cc/bSnS1LBc/candy.png"},
-        {name:"Gift Mimic", normal:50, gold:200, rainbow:250, img:"https://i.postimg.cc/8FkvxRjC/75.png"},
-        {name:"Hooded Krampus", normal:500, gold:2000, rainbow:2100, img:"https://i.postimg.cc/0bpJQWSS/hooded.png"},
-        {name:"Disco Lord", normal:1200, gold:4500, rainbow:5000, img:"https://8upload.com/image/49098f59873d3dc0/disco.png"}
-      ]
-    };
+  exclusives: [
+    {name:"Kairos", demand:"mid", normal:80, gold:250, rainbow:300, img:"https://i.postimg.cc/XXnv9kTC/kairos.png"},
+    {name:"Paradox", demand:"mid", normal:125, gold:550, rainbow:600, img:"https://i.postimg.cc/RqGZdnBy/paradox.png"},
+    {name:"Chronos", demand:"high", normal:10000, gold:"o/c", rainbow:"o/c", img:"https://i.postimg.cc/SjmKcfwQ/chronos.png"},
+    {name:"Krampus", demand:"high", normal:2300, gold:9500, rainbow:10000, img:"https://i.postimg.cc/1fpNtCFP/krampus.png"},
+    {name:"Evil Snowman", demand:"mid", normal:100, gold:300, rainbow:350, img:"https://i.postimg.cc/y3R30nrM/90.png"},
+    {name:"Snow Thief", demand:"low", normal:50, gold:200, rainbow:250, img:"https://i.postimg.cc/QK7KcSnv/80.png"},
+    {name:"Celestial Candycane", demand:"high", normal:1000, gold:4000, rainbow:4200, img:"https://i.postimg.cc/bSnS1LBc/candy.png"},
+    {name:"Gift Mimic", demand:"low", normal:50, gold:200, rainbow:250, img:"https://i.postimg.cc/8FkvxRjC/75.png"},
+    {name:"Hooded Krampus", demand:"low", normal:500, gold:2000, rainbow:2100, img:"https://i.postimg.cc/0bpJQWSS/hooded.png"},
+    {name:"Disco Lord", demand:"mid", normal:1200, gold:4500, rainbow:5000, img:"https://8upload.com/image/49098f59873d3dc0/disco.png"}
+  ]
+};
+
 
     // Randomly assign demand to every pet (you can edit later by setting demand:"high"/"mid"/"low")
     function assignRandomDemand(){
