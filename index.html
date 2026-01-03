@@ -19,6 +19,7 @@
     }
     *{ box-sizing:border-box; }
     html, body { height:100%; }
+
     body{
       margin:0;
       font-family: Arial, sans-serif;
@@ -28,28 +29,29 @@
         radial-gradient(700px 500px at 90% 0%, rgba(124,77,255,0.14), transparent 55%),
         radial-gradient(900px 700px at 60% 120%, rgba(255,210,77,0.10), transparent 55%),
         var(--bg);
+      background-attachment: fixed;          /* ✅ stops the “random background change” at bottom */
+      background-repeat: no-repeat;
     }
     body.noScroll{ overflow:hidden; }
 
     /* ===== CLEAN DARK SCROLLBAR (PC) ===== */
-    /* Chrome / Edge / Safari */
     *::-webkit-scrollbar{ width: 10px; height: 10px; }
     *::-webkit-scrollbar-track{
-      background: rgba(255,255,255,0.04);
-      border-radius: 999px;
+      background: rgba(255,255,255,0.03);
+      border-left: 1px solid rgba(255,255,255,0.05);
     }
     *::-webkit-scrollbar-thumb{
-      background: rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.12);
       border-radius: 999px;
       border: 2px solid rgba(0,0,0,0.35);
     }
     *::-webkit-scrollbar-thumb:hover{
-      background: rgba(255,255,255,0.24);
+      background: rgba(255,255,255,0.18);
     }
     /* Firefox */
     *{
       scrollbar-width: thin;
-      scrollbar-color: rgba(255,255,255,0.18) rgba(255,255,255,0.04);
+      scrollbar-color: rgba(255,255,255,0.16) rgba(255,255,255,0.03);
     }
 
     .app{
@@ -283,32 +285,20 @@
       font-weight: 900;
     }
 
-    /* ===== DEMAND TAGS (sleek) ===== */
-.tag.demand{
-  position: relative;
-  font-weight: 1000;
-  letter-spacing: 0.2px;
+    /* ===== DEMAND TAGS (sleek / text coloured only) ===== */
+    .tag.demand{
+      font-weight: 1000;
+      letter-spacing: 0.2px;
+      background:
+        linear-gradient(rgba(12,12,18,0.55), rgba(12,12,18,0.55)) padding-box,
+        linear-gradient(135deg, rgba(255,255,255,0.22), rgba(255,255,255,0.06)) border-box;
+      border: 1px solid transparent;
+      box-shadow: 0 10px 18px rgba(0,0,0,0.22);
+    }
 
-  /* subtle dark fill */
-  color: var(--muted);
-  background:
-    linear-gradient(rgba(12,12,18,0.55), rgba(12,12,18,0.55)) padding-box,
-    linear-gradient(135deg, rgba(255,255,255,0.22), rgba(255,255,255,0.06)) border-box;
-
-  border: 1px solid transparent;
-  box-shadow: 0 10px 18px rgba(0,0,0,0.22);
-}
-
-/* only colour the text (clean) */
-.tag.demand.high{ color: #54ff9b; }
-.tag.demand.mid { color: #ffd24d; }
-.tag.demand.low { color: #ff5c5c; }
-
-/* optional: tiny glow so it feels “premium” */
-.tag.demand.high{ text-shadow: 0 0 12px rgba(84,255,155,0.18); }
-.tag.demand.mid { text-shadow: 0 0 12px rgba(255,210,77,0.16); }
-.tag.demand.low { text-shadow: 0 0 12px rgba(255,92,92,0.16); }
-
+    .tag.demand.high{ color: #54ff9b; text-shadow: 0 0 12px rgba(84,255,155,0.18); }
+    .tag.demand.mid { color: #ffd24d; text-shadow: 0 0 12px rgba(255,210,77,0.16); }
+    .tag.demand.low { color: #ff5c5c; text-shadow: 0 0 12px rgba(255,92,92,0.16); }
 
     .table{ margin-top: 10px; display:grid; gap:8px; }
     .row{
@@ -335,7 +325,7 @@
       text-shadow: 0 0 12px rgba(120, 220, 255, 0.22);
     }
 
-    /* Make the value look premium with a soft pill behind it */
+    /* pill behind values */
     .row span:last-child{
       display: inline-flex;
       align-items: center;
@@ -347,7 +337,6 @@
       background: rgba(255,255,255,0.04);
     }
 
-    /* Gold “metal” pill */
     .row span.g{
       background: linear-gradient(
         90deg,
@@ -358,7 +347,6 @@
       border-color: rgba(255, 211, 107, 0.22);
     }
 
-    /* True rainbow pill */
     .row span.r{
       background: linear-gradient(90deg,
         rgba(255, 59, 59, 0.16),
@@ -609,6 +597,7 @@
     }
 
     // ===== DATA =====
+    // To set manually later, add: demand:"high"  OR  demand:"mid"  OR  demand:"low"
     const data = {
       leaderboard: [
         {name:"Top 10 Divine Celestina", normal:13000, gold:"o/c", rainbow:"o/c", img:"https://i.postimg.cc/zbFX9yRD/10.png"},
@@ -723,7 +712,9 @@
     }
 
     function copyPet(p){
-      const text = `${p.name}\nNormal: ${p.normal}\nGolden: ${p.gold}\nRainbow: ${p.rainbow}\nDemand: ${p.demand || "mid"}`;
+      const d = (p.demand || "mid").toString().toLowerCase();
+      const demandText = (d === "high") ? "High" : (d === "low") ? "Low" : "Mid";
+      const text = `${p.name}\nNormal: ${p.normal}\nGolden: ${p.gold}\nRainbow: ${p.rainbow}\nDemand: ${demandText}`;
       navigator.clipboard.writeText(text).then(() => toast("Copied values ✅"));
     }
 
@@ -782,8 +773,8 @@
       const shown = list.length;
       const tradeableCount = list.filter(p => parseValue(p.normal) !== null).length;
 
+      /* ✅ removed "Tab: ..." pill */
       el("stats").innerHTML = `
-        <div class="pill">Tab: <b>${TAB_CONFIG.find(t=>t.key===currentTab)?.label || currentTab}</b></div>
         <div class="pill">Showing: <b>${shown}</b> / ${total}</div>
         <div class="pill">Tradeable: <b>${tradeableCount}</b></div>
       `;
@@ -807,9 +798,10 @@
                 </div>
                 <div class="petTitle">
                   <h3>${p.name}</h3>
+
+                  <!-- ✅ only demand (no tab tag, no normal badge) -->
                   <div class="tagRow">
                     <span class="tag demand ${d.key}">Demand: ${d.text}</span>
-                    <span class="tag">${currentTab}</span>
                   </div>
                 </div>
               </div>
