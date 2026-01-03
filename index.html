@@ -277,69 +277,51 @@
 .row span:first-child{ color: var(--muted); font-weight: 900; }
 .row .n{ color: white; }
 
-/* ===== Better Gold + True Rainbow ===== */
-.row .g,
-.row .r{
-  font-weight: 1000;
-  letter-spacing: 0.2px;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  -webkit-background-clip: text;
-}
-
-/* Metallic gold (more “real” than flat yellow) */
+/* ALWAYS visible + nicer colours */
 .row .g{
-  background-image: linear-gradient(
-    90deg,
-    #9b6a10 0%,
-    #ffd36b 25%,
-    #fff1b0 45%,
-    #f3c14b 65%,
-    #b67d12 100%
-  );
-  text-shadow: 0 0 14px rgba(255, 208, 96, 0.22);
+  color: #ffd36b;                 /* proper gold */
+  text-shadow: 0 0 12px rgba(255, 208, 96, 0.25);
 }
-
-/* Genuine rainbow gradient (not just purple) */
 .row .r{
-  background-image: linear-gradient(
-    90deg,
-    #ff3b3b 0%,
-    #ff8a00 16%,
-    #ffd000 32%,
-    #21d07a 50%,
-    #2aa7ff 68%,
-    #7a5cff 84%,
-    #ff4fd8 100%
-  );
-  text-shadow: 0 0 14px rgba(88, 200, 255, 0.18);
+  color: #bff6ff;                 /* bright readable base */
+  text-shadow: 0 0 12px rgba(120, 220, 255, 0.22);
 }
 
-/* Optional: subtle “pill” backgrounds for gold/rainbow values */
+/* Make the value look premium with a soft pill behind it */
 .row span:last-child{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 70px;                /* keeps alignment looking clean */
   padding: 6px 10px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.08);
-}
-.row span.g{
-  background: linear-gradient(90deg, rgba(255, 211, 107, 0.14), rgba(182, 125, 18, 0.06));
-}
-.row span.r{
-  background: linear-gradient(90deg,
-    rgba(255, 59, 59, 0.10),
-    rgba(255, 138, 0, 0.08),
-    rgba(255, 208, 0, 0.08),
-    rgba(33, 208, 122, 0.08),
-    rgba(42, 167, 255, 0.08),
-    rgba(122, 92, 255, 0.08),
-    rgba(255, 79, 216, 0.10)
-  );
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.04);
 }
 
-/* Fallback if a browser doesn’t support gradient text */
-@supports not (-webkit-background-clip: text){
-  .row .g{ color:#ffd36b; }
-  .row .r{ color:#7a5cff; }
+/* Gold “metal” pill */
+.row span.g{
+  background: linear-gradient(
+    90deg,
+    rgba(155, 106, 16, 0.22),
+    rgba(255, 211, 107, 0.16),
+    rgba(255, 241, 176, 0.12)
+  );
+  border-color: rgba(255, 211, 107, 0.22);
+}
+
+/* True rainbow pill */
+.row span.r{
+  background: linear-gradient(90deg,
+    rgba(255, 59, 59, 0.16),
+    rgba(255, 138, 0, 0.14),
+    rgba(255, 208, 0, 0.14),
+    rgba(33, 208, 122, 0.14),
+    rgba(42, 167, 255, 0.14),
+    rgba(122, 92, 255, 0.14),
+    rgba(255, 79, 216, 0.16)
+  );
+  border-color: rgba(180, 230, 255, 0.20);
 }
 
     .actions{ margin-top: 10px; display:flex; gap:10px; }
